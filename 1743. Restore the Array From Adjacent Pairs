@@ -1,0 +1,34 @@
+class Solution {
+public:
+
+    void dfs(map<int,vector<int>>&m,set<int>&v,vector<int>&ans,int &start)
+    {
+        if(v.find(start)!=v.end())return;
+        ans.push_back(start);
+        v.insert(start);
+        for(auto x:m[start])
+        {
+            dfs(m,v,ans,x);
+        }
+    }
+
+
+    vector<int> restoreArray(vector<vector<int>>& p) {
+        map<int,vector<int>>m;
+        for(auto it :p)
+        {
+            m[it[0]].push_back(it[1]);
+            m[it[1]].push_back(it[0]);
+        }
+        int start;
+        for(auto it :m){
+            if(it.second.size()==1)
+            start=it.first;
+        }
+
+        set<int>v;
+        vector<int>ans;
+        dfs(m,v,ans,start);
+        return ans;
+    }
+};
