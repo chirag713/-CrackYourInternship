@@ -1,0 +1,7 @@
+class Solution {
+public:
+    string convertToTitle(int c) {
+        if(c==0) return "";
+        return (convertToTitle((c-1)/26) + (char) ('A' + ((c - 1) % 26)));
+    }
+};
