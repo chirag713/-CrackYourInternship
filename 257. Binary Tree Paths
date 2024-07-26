@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
+        vector<string> result;
+        if (!root) return result; 
+        string path = to_string(root->val);
+        
+        if (!root->left && !root->right) {
+            result.push_back(path);
+            return result;
+        }
+        
+        if (root->left) {
+            vector<string> chirags = binaryTreePaths(root->left);
+            for (const string& chirag : chirags) {
+                result.push_back(path + "->" + chirag);
+            }
+        }
+
+        if (root->right) {
+            vector<string> bhutnis = binaryTreePaths(root->right);
+            for (const string& bhutni : bhutnis) {
+                result.push_back(path + "->" + bhutni);
+            }
+        }
+        
+        return result;
+    }
+};
