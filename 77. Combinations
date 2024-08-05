@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<vector<int>> combine(int n, int k) {
+        vector<vector<int>> result;
+        vector<int> currentCombination;
+        generateCombinations(result, currentCombination, 1, n, k);
+        return result;
+    }
+    
+private:
+    void generateCombinations(vector<vector<int>>& result, vector<int>& currentCombination, int start, int n, int k) {
+        if (k == 0) {
+            result.push_back(currentCombination);
+            return;
+        }
+        
+        for (int i = start; i <= n; ++i) {
+            currentCombination.push_back(i);
+            generateCombinations(result, currentCombination, i + 1, n, k - 1);
+            currentCombination.pop_back();
+        }
+    }
+};
