@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maxScore(vector<int>& c, int k) {
+        int ans=0;
+        for(int i=0;i<k;i++){
+            ans+=c[i];
+        }
+
+        int temp=ans;
+
+        int j=1;
+
+        for(int i=c.size()-1;i>c.size()-1-k;i--){
+            temp-=c[k-j];
+            temp+=c[i];
+            ans=max(temp , ans);
+            j++;
+        }
+        return ans;
+    }
+};
