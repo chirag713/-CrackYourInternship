@@ -1,0 +1,43 @@
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        if(nums.size()==1)
+        return 1;
+        int ans=1;
+        int n=nums.size()-1;
+        if(nums[n]==0)
+        {
+            ans=0;
+            int x=n;
+            n--;
+            while(n>=0)
+            {
+                if(nums[n]>=(x-n))
+                {
+                    ans=1;
+                    break;
+                }
+                n--;
+            }
+        }
+        for(;n>=0;n--)
+        {
+            if(nums[n]==0)
+            {
+                ans=0;
+                int x=n;
+                n--;
+                while(n>=0)
+                {
+                    if(nums[n]>(x-n))
+                    {
+                        ans=1;
+                        break;
+                    }
+                    n--;
+                }
+            }
+        }
+        return ans;
+    }
+};
