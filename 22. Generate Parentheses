@@ -1,0 +1,31 @@
+class Solution {
+public:
+
+    vector<string>ans;
+
+
+    void solve(int open , int close , string x , int n){
+
+        if(x.size()==2*n) {
+            ans.push_back(x);
+            return;
+        }
+
+        if(close>open){
+            x+=')';
+            solve( open , close-1 , x , n );
+            x.pop_back();
+        }
+        if(open>0){
+            x+='(';
+            solve(open-1 , close , x,n);
+            
+        }
+    }
+    vector<string> generateParenthesis(int n) {
+        
+        solve(n,n,"",n);
+
+        return ans;
+    }
+};
