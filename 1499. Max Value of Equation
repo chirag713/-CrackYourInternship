@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int findMaxValueOfEquation(vector<vector<int>>& points, int k) {
+        int ans = INT_MIN;
+        int n = points.size();
+        priority_queue<pair<int, int>> pq;
+        
+        for (int i = 0; i < n; i++) {
+            // Remove elements that are out of the valid range
+            while (!pq.empty() && (points[i][0] - pq.top().second) > k) {
+                pq.pop();
+            }
+            
+            // If priority queue is not empty, calculate the potential maximum value
+            if (!pq.empty()) {
+                ans = max(ans, points[i][0] + points[i][1] + pq.top().first);
+            }
+            
+            // Push the current point's value and x-coordinate to the priority queue
+            pq.push({points[i][1] - points[i][0], points[i][0]});
+        }
+        
+        return ans;
+    }
+};
