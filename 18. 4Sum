@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        int n=nums.size();
+        vector<vector<int>>ans;
+        set<vector<int>>s;
+        sort(nums.begin() , nums.end());
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                int left=j+1 , right = n-1;
+                long long require=(long long)target-nums[i]-nums[j];
+                while(left<right){
+                    if(nums[left]+nums[right] < require) left++;
+                    else if(nums[left]+nums[right] > require) right--;
+                    else{
+                        s.insert({nums[i] , nums[j] , nums[left] , nums[right]});
+                        left++;
+                    }
+                }
+            }
+        }
+        for(auto &it : s) ans.push_back(it);
+        return ans;
+    }
+};
